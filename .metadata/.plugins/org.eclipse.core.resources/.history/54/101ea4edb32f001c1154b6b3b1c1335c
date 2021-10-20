@@ -1,0 +1,40 @@
+package model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+// @Table(name="tabela_palavra")
+public class Palavra {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String palavra;
+	private Boolean dificuldade;
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getNome() {
+		return palavra;
+	}
+	public void setNome(String nome) {
+		this.palavra = nome;
+	}
+	public String getDificuldade() {
+		if(dificuldade == true) {
+			return "Normal";
+		}else {
+			return "Fácil";
+		}
+	}
+	public void setDificuldade(Boolean dificuldade) {
+		this.dificuldade = dificuldade;
+	}
+	
+	
+}

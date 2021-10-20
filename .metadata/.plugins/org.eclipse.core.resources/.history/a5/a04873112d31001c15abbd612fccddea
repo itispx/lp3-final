@@ -1,0 +1,24 @@
+package br.ifsul.jogodaforca;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
+
+import net.bytebuddy.dynamic.loading.ClassLoadingStrategy.Configurable;
+
+@SpringBootApplication
+public class JogoDaForcaApplication {
+
+	public static void main(String[] args) {
+		SpringApplicationBuilder sab = new SpringApplicationBuilder(JogoDaForcaApplication.class);
+		
+		sab.headless(false);
+		
+ConfigurableApplicationContext app = sab.run(args);
+
+	Main instancia = (Main) app.getBean('')
+	
+	
+	}
+}

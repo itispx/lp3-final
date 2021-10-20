@@ -1,0 +1,11 @@
+package br.ifsul.jogodaforca.ui;
+
+import javax.swing.JPanel;
+
+public class UIAdicionar extends JPanel {
+	public UIAdicionar() {
+		setLayout(null);
+
+	}
+
+}

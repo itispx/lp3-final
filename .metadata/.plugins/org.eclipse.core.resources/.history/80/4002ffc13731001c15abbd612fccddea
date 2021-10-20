@@ -1,0 +1,14 @@
+package br.ifsul.jogodaforca.ui;
+
+import javax.swing.JPanel;
+
+public class UIRelatorio extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public UIRelatorio() {
+
+	}
+
+}
