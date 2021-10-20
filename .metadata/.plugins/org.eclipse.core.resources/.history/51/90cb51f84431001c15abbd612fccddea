@@ -59,7 +59,7 @@ public class UIAdicionar extends JFrame {
 
 				lblAviso.setText("");
 
-				Boolean dif = null;
+				int dif = 0;
 
 				if (palavra.isEmpty()) {
 					lblAviso.setText("Insira uma palavra");
@@ -71,21 +71,16 @@ public class UIAdicionar extends JFrame {
 						lblAviso.setText("Palavras faceis devem conter 4 caracteres");
 						return;
 					}
-					dif = false;
-
+					lblAviso.setText("Ass cum")
 				} else if (rdbtnNormal.isSelected()) {
+
 					if (palavra.length() != 6) {
 						lblAviso.setText("Palavras normais devem conter 6 caracteres");
 						return;
 					}
-					dif = true;
 
 				} else {
 					lblAviso.setText("Selecione uma dificuldade");
-				}
-
-				if (dif != null) {
-					// TO DO: Adicionar ao banco
 				}
 
 			}
@@ -116,7 +111,7 @@ public class UIAdicionar extends JFrame {
 		contentPane.add(rdbtnNormal);
 
 		lblAviso = new JLabel("");
-		lblAviso.setBounds(10, 128, 414, 14);
+		lblAviso.setBounds(10, 128, 208, 14);
 		contentPane.add(lblAviso);
 	}
 }

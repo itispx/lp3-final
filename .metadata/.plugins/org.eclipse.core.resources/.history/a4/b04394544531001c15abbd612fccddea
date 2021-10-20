@@ -59,7 +59,7 @@ public class UIAdicionar extends JFrame {
 
 				lblAviso.setText("");
 
-				Boolean dif = null;
+				boolean dif;
 
 				if (palavra.isEmpty()) {
 					lblAviso.setText("Insira uma palavra");
@@ -82,10 +82,6 @@ public class UIAdicionar extends JFrame {
 
 				} else {
 					lblAviso.setText("Selecione uma dificuldade");
-				}
-
-				if (dif != null) {
-					// TO DO: Adicionar ao banco
 				}
 
 			}
