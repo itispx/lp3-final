@@ -2,6 +2,9 @@ package br.ifsul.jogodaforca.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -12,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 
 import br.ifsul.jogodaforca.model.Palavra;
 import br.ifsul.jogodaforca.model.PalavraRepository;
+import javax.swing.JLabel;
+import java.awt.TextArea;
 
 public class UIRelatorio extends JFrame {
 
@@ -33,17 +38,31 @@ public class UIRelatorio extends JFrame {
 		});
 		btnVoltar.setBounds(173, 227, 89, 23);
 		contentPane.add(btnVoltar);
-
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(10, 11, 414, 205);
+		
+		TextArea textArea = new TextArea();
+		textArea.setBounds(10, 10, 414, 211);
 		contentPane.add(textArea);
 
-		// TO DO: Ordenar por ordem alfabética e agrupar por dificuldade
-		
-		List<Palavra> listaPalavras = palavraRepository.findAll();
-		
-		for (Palavra p : listaPalavras) {
-			textArea.append(p.getPalavra() + "\n");
+		List<Palavra> listaPalavraRepository = palavraRepository.findAll();
+
+		List<String> listaPalavras = new ArrayList<String>();
+
+		for (Palavra p : listaPalavraRepository) {
+			listaPalavras.add(p.getPalavra());
+		}
+
+		Collections.sort(listaPalavras);
+
+		for (String p : listaPalavras) {
+			if (p.length() >= 6) {
+				textArea.append(p + "\n");
+			}
+		}
+
+		for (String p : listaPalavras) {
+			if (p.length() <= 4) {
+				textArea.append(p + "\n");
+			}
 		}
 
 	}

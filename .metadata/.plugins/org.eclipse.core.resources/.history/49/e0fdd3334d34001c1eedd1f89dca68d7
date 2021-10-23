@@ -1,0 +1,36 @@
+package br.ifsul.jogodaforca.ui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+public class UIDificuldade extends JFrame {
+
+	private JPanel contentPane;
+
+	public UIDificuldade(Boolean dificuldade) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnJogar = new JButton("Jogar");
+		btnJogar.setBounds(225, 227, 199, 23);
+		contentPane.add(btnJogar);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setBounds(10, 227, 199, 23);
+		contentPane.add(btnVoltar);
+		
+		JLabel lblTitulo = new JLabel("New label");
+		lblTitulo.setBounds(192, 43, 46, 14);
+		contentPane.add(lblTitulo);
+	}
+}

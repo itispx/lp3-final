@@ -13,6 +13,15 @@ public class Palavra {
 	private String palavra;
 	private Boolean dificuldade;
 
+	public Palavra() {
+	}
+
+	public Palavra(Integer id, String palavra, Boolean dificuldade) {
+		this.id = id;
+		this.palavra = palavra;
+		this.dificuldade = dificuldade;
+	}
+
 	public Integer getId() {
 		return id;
 	}

@@ -7,7 +7,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import br.ifsul.jogodaforca.model.PalavraRepository;
 import br.ifsul.jogodaforca.ui.UIAdicionar;
-import br.ifsul.jogodaforca.ui.UIRelatorio;
 
 @SpringBootApplication
 public class Main {
@@ -29,9 +28,15 @@ public class Main {
 
 		// UIRelatorio uir = new UIRelatorio(instancia.palavraRepository);
 		// uir.setVisible(true);
-		
-		UIAdicionar uia = new UIAdicionar();
+
+		UIAdicionar uia = new UIAdicionar(instancia.palavraRepository);
 		uia.setVisible(true);
+
+		// UIDificuldade uid = new UIDificuldade();
+		// uid.setVisible(true);
+
+		// UIJogo uij = new UIJogo(instancia.palavraRepository);
+		// uij.setVisible(true);
 	}
 
 }

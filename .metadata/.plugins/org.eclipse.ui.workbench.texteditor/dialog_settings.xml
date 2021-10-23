@@ -6,7 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
+		<item key="selection" value="in();"/>
 		<list key="findhistory">
+			<item value="in();"/>
 		</list>
 		<list key="replacehistory">
 		</list>

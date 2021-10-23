@@ -1,19 +1,18 @@
 package br.ifsul.jogodaforca.ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JToolBar;
-import javax.swing.JToggleButton;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import br.ifsul.jogodaforca.model.Palavra;
+import br.ifsul.jogodaforca.model.PalavraRepository;
 
 public class UIAdicionar extends JFrame {
 
@@ -24,8 +23,9 @@ public class UIAdicionar extends JFrame {
 	private JRadioButton rdbtnNormal;
 
 	private JLabel lblAviso;
+	private JButton btnVoltar;
 
-	public UIAdicionar() {
+	public UIAdicionar(PalavraRepository palavraRepository) {
 		setTitle("Adicionar Palavra");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -34,9 +34,9 @@ public class UIAdicionar extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Insira a palavra:");
-		lblNewLabel.setBounds(10, 22, 208, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lblTitulo = new JLabel("Insira a palavra:");
+		lblTitulo.setBounds(10, 22, 208, 14);
+		contentPane.add(lblTitulo);
 
 		textField = new JTextField();
 		textField.setBounds(10, 45, 208, 20);
@@ -85,7 +85,8 @@ public class UIAdicionar extends JFrame {
 				}
 
 				if (dif != null) {
-					// TO DO: Adicionar ao banco
+					Palavra novaPalavra = new Palavra(null, palavra, dif);
+					palavraRepository.save(novaPalavra);
 				}
 
 			}
@@ -118,5 +119,14 @@ public class UIAdicionar extends JFrame {
 		lblAviso = new JLabel("");
 		lblAviso.setBounds(10, 128, 414, 14);
 		contentPane.add(lblAviso);
+
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TO DO: Navegação
+			}
+		});
+		btnVoltar.setBounds(10, 191, 414, 23);
+		contentPane.add(btnVoltar);
 	}
 }
