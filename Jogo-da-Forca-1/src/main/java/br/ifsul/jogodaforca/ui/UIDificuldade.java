@@ -35,7 +35,7 @@ public class UIDificuldade extends JFrame {
 				if (dificuldade == null) {
 					lblAviso.setText("Escolha uma dificuldade");
 				} else {
-					UIJogo uij = new UIJogo(palavraRepository);
+					UIJogo uij = new UIJogo(palavraRepository, dificuldade);
 					uij.setVisible(true);
 					setVisible(false);
 				}
@@ -56,7 +56,7 @@ public class UIDificuldade extends JFrame {
 		contentPane.add(btnVoltar);
 
 		JLabel lblTitulo = new JLabel("Selecione uma dificuldade:");
-		lblTitulo.setBounds(144, 42, 161, 14);
+		lblTitulo.setBounds(10, 42, 161, 14);
 		contentPane.add(lblTitulo);
 
 		rdbtnFacil = new JRadioButton("Fácil");
@@ -68,7 +68,7 @@ public class UIDificuldade extends JFrame {
 				dificuldade = false;
 			}
 		});
-		rdbtnFacil.setBounds(170, 63, 109, 23);
+		rdbtnFacil.setBounds(20, 63, 109, 23);
 		contentPane.add(rdbtnFacil);
 
 		rdbtnNormal = new JRadioButton("Normal");
@@ -80,7 +80,7 @@ public class UIDificuldade extends JFrame {
 				dificuldade = true;
 			}
 		});
-		rdbtnNormal.setBounds(170, 89, 109, 23);
+		rdbtnNormal.setBounds(20, 89, 109, 23);
 		contentPane.add(rdbtnNormal);
 
 		lblAviso = new JLabel("");

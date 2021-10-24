@@ -85,7 +85,7 @@ public class UIAdicionar extends JFrame {
 				}
 
 				if (dif != null) {
-					Palavra novaPalavra = new Palavra(null, palavra, dif);
+					Palavra novaPalavra = new Palavra(null, palavra.toUpperCase(), dif);
 					palavraRepository.save(novaPalavra);
 					lblAviso.setText("Palavra adicionada");
 				}

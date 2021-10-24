@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import org.springframework.data.domain.Sort;
+
 import br.ifsul.jogodaforca.model.Palavra;
 import br.ifsul.jogodaforca.model.PalavraRepository;
 import javax.swing.JLabel;
@@ -41,32 +43,31 @@ public class UIRelatorio extends JFrame {
 		});
 		btnVoltar.setBounds(173, 227, 89, 23);
 		contentPane.add(btnVoltar);
-		
-		TextArea textArea = new TextArea();
-		textArea.setBounds(10, 10, 414, 211);
-		contentPane.add(textArea);
 
-		List<Palavra> listaPalavraRepository = palavraRepository.findAll();
+		TextArea textAreaFaceis = new TextArea();
+		textAreaFaceis.setBounds(10, 31, 414, 78);
+		contentPane.add(textAreaFaceis);
 
-		List<String> listaPalavras = new ArrayList<String>();
+		TextArea textAreaNormais = new TextArea();
+		textAreaNormais.setBounds(10, 135, 414, 86);
+		contentPane.add(textAreaNormais);
 
-		for (Palavra p : listaPalavraRepository) {
-			listaPalavras.add(p.getPalavra());
-		}
+		JLabel lblFaceis = new JLabel("Fáceis:");
+		lblFaceis.setBounds(10, 11, 414, 14);
+		contentPane.add(lblFaceis);
 
-		Collections.sort(listaPalavras);
+		JLabel lblNormais = new JLabel("Normais:");
+		lblNormais.setBounds(10, 115, 414, 14);
+		contentPane.add(lblNormais);
 
-		for (String p : listaPalavras) {
-			if (p.length() >= 6) {
-				textArea.append(p + "\n");
+		List<Palavra> listaPalavras = palavraRepository.findAll(Sort.by(Sort.Direction.ASC, "palavra"));
+
+		for (Palavra p : listaPalavras) {
+			if (p.getPalavra().length() < 6) {
+				textAreaFaceis.append(p.getPalavra() + "\n");
+			} else {
+				textAreaNormais.append(p.getPalavra() + "\n");
 			}
 		}
-
-		for (String p : listaPalavras) {
-			if (p.length() <= 4) {
-				textArea.append(p + "\n");
-			}
-		}
-
 	}
 }

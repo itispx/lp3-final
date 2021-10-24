@@ -1,0 +1,73 @@
+package br.ifsul.jogodaforca.ui;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import br.ifsul.jogodaforca.model.Palavra;
+import br.ifsul.jogodaforca.model.PalavraRepository;
+
+public class UIJogo extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+
+	public UIJogo(PalavraRepository palavraRepository, Boolean dificuldade) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		Palavra palavra = palavraRepository.findRandomByDificuldade(dificuldade);
+
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UIDificuldade uid = new UIDificuldade(palavraRepository);
+				uid.setVisible(true);
+				setVisible(false);
+			}
+		});
+		btnVoltar.setBounds(10, 227, 414, 23);
+		contentPane.add(btnVoltar);
+
+		JLabel lblTentativas = new JLabel("Tentativas:");
+		lblTentativas.setBounds(10, 11, 166, 14);
+		contentPane.add(lblTentativas);
+
+		JTextArea textAreaTentativas = new JTextArea();
+		textAreaTentativas.setBounds(10, 36, 300, 68);
+		contentPane.add(textAreaTentativas);
+
+		JLabel lblTituloInserir = new JLabel("Insira uma letra:");
+		lblTituloInserir.setBounds(10, 115, 166, 14);
+		contentPane.add(lblTituloInserir);
+
+		textField = new JTextField();
+		textField.setBounds(10, 140, 86, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setBounds(10, 171, 89, 23);
+		contentPane.add(btnConfirmar);
+
+		JLabel lblBoneco = new JLabel("");
+		ImageIcon img = new ImageIcon(this.getClass().getResource("/vidas_0"));
+		lblBoneco.setIcon(img);
+
+		lblBoneco.setBounds(311, 11, 113, 149);
+		contentPane.add(lblBoneco);
+
+	}
+}

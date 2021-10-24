@@ -1,0 +1,109 @@
+package br.ifsul.jogodaforca.ui;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import br.ifsul.jogodaforca.model.Palavra;
+import br.ifsul.jogodaforca.model.PalavraRepository;
+
+public class UIJogo extends JFrame {
+
+	private JPanel contentPane;
+	private JLabel lblPalavra = new JLabel("");
+	private JTextField textFielEntrada;
+	private JLabel lblAviso;;
+
+	private ArrayList<Character> acertos = new ArrayList<Character>();
+	private ArrayList<Character> erros = new ArrayList<Character>();
+
+	private Integer vidas = 6;
+
+	public UIJogo(PalavraRepository palavraRepository, Boolean dificuldade) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		Palavra palavra = palavraRepository.findRandomByDificuldade(dificuldade);
+
+		if (dificuldade == true) {
+			lblPalavra.setText(" _ _ _ _ _ _ ");
+		} else {
+			lblPalavra.setText(" _ _ _ _ ");
+		}
+
+		JTextArea textAreaTentativas = new JTextArea();
+		textAreaTentativas.setBounds(123, 140, 178, 54);
+		contentPane.add(textAreaTentativas);
+
+		textFielEntrada = new JTextField();
+		textFielEntrada.setBounds(10, 140, 103, 20);
+		contentPane.add(textFielEntrada);
+		textFielEntrada.setColumns(10);
+
+		JLabel lblBoneco = new JLabel("");
+		ImageIcon img = new ImageIcon(this.getClass().getResource(""));
+		lblBoneco.setIcon(img);
+		lblBoneco.setBounds(311, 11, 113, 149);
+		contentPane.add(lblBoneco);
+
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String entrada = textFielEntrada.getText();
+				if (entrada.isEmpty()) {
+					lblAviso.setText("Insira uma letra");
+				} else if (entrada.length() > 1) {
+					lblAviso.setText("Insira apenas uma letra");
+				}
+			}
+		});
+		btnConfirmar.setBounds(10, 171, 103, 23);
+		contentPane.add(btnConfirmar);
+
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UIDificuldade uid = new UIDificuldade(palavraRepository);
+				uid.setVisible(true);
+				setVisible(false);
+			}
+		});
+		btnVoltar.setBounds(10, 227, 414, 23);
+		contentPane.add(btnVoltar);
+
+		JLabel lblTituloInserir = new JLabel("Insira uma letra:");
+		lblTituloInserir.setBounds(10, 115, 103, 14);
+		contentPane.add(lblTituloInserir);
+
+		JLabel lblTentativas = new JLabel("Tentativas:");
+		lblTentativas.setBounds(123, 115, 178, 14);
+		contentPane.add(lblTentativas);
+
+		lblAviso = new JLabel("");
+		lblAviso.setBounds(10, 205, 414, 14);
+		contentPane.add(lblAviso);
+
+		JLabel lblTituloPalavra = new JLabel("PALAVRA");
+		lblTituloPalavra.setBounds(10, 11, 103, 14);
+		contentPane.add(lblTituloPalavra);
+
+		lblPalavra.setBounds(10, 36, 291, 54);
+		contentPane.add(lblPalavra);
+
+		System.out.println(palavra.getPalavra());
+	}
+}

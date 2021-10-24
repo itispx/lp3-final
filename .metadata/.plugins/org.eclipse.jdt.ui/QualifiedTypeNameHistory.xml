@@ -10,7 +10,15 @@
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="org.springframework.context.ConfigurableApplicationContext"/>
     <fullyQualifiedTypeName name="br.ifsul.jogodaforca.ui.UIMain"/>
-    <fullyQualifiedTypeName name="br.ifsul.jogodaforca.model.PalavraRepository"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="br.ifsul.jogodaforca.ui.UIAdicionar"/>
+    <fullyQualifiedTypeName name="java.util.Comparator"/>
+    <fullyQualifiedTypeName name="org.apache.logging.log4j.util.PropertySource.Comparator"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Example"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="br.ifsul.jogodaforca.ui.UIDificuldade"/>
+    <fullyQualifiedTypeName name="br.ifsul.jogodaforca.model.Palavra"/>
+    <fullyQualifiedTypeName name="br.ifsul.jogodaforca.model.PalavraRepository"/>
+    <fullyQualifiedTypeName name="br.ifsul.jogodaforca.ui.UIRelatorio"/>
 </qualifiedTypeNameHistroy>
