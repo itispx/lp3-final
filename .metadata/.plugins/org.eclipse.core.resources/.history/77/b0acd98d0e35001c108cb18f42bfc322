@@ -69,7 +69,7 @@ public class UIJogo extends JFrame {
 			textAreaPalavra.append(" " + exibir.get(i));
 		}
 
-		textAreaTentativas.setEnabled(false);
+		textAreaPalavra.setEnabled(false);
 		textAreaTentativas.setDisabledTextColor(Color.BLACK);
 		textAreaTentativas.setBounds(123, 140, 178, 54);
 		contentPane.add(textAreaTentativas);

@@ -62,14 +62,13 @@ public class UIJogo extends JFrame {
 
 		Palavra palavra = palavraRepository.findRandomByDificuldade(dificuldade);
 
-		textAreaPalavra.setEnabled(false);
-		textAreaPalavra.setDisabledTextColor(Color.BLACK);
+		textAreaPalavra.disable();
 		for (int i = 0; i < palavra.getPalavra().length(); i++) {
 			exibir.add('_');
 			textAreaPalavra.append(" " + exibir.get(i));
 		}
 
-		textAreaTentativas.setEnabled(false);
+		textAreaTentativas.disable();
 		textAreaTentativas.setDisabledTextColor(Color.BLACK);
 		textAreaTentativas.setBounds(123, 140, 178, 54);
 		contentPane.add(textAreaTentativas);

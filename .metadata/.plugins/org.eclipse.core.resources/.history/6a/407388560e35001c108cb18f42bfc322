@@ -1,6 +1,5 @@
 package br.ifsul.jogodaforca.ui;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -62,15 +61,14 @@ public class UIJogo extends JFrame {
 
 		Palavra palavra = palavraRepository.findRandomByDificuldade(dificuldade);
 
-		textAreaPalavra.setEnabled(false);
-		textAreaPalavra.setDisabledTextColor(Color.BLACK);
+		textAreaPalavra.disable();
 		for (int i = 0; i < palavra.getPalavra().length(); i++) {
 			exibir.add('_');
 			textAreaPalavra.append(" " + exibir.get(i));
 		}
 
-		textAreaTentativas.setEnabled(false);
-		textAreaTentativas.setDisabledTextColor(Color.BLACK);
+		textAreaTentativas.disable();
+		textAreaTentativas.setDisabledTextColor(getBackground());
 		textAreaTentativas.setBounds(123, 140, 178, 54);
 		contentPane.add(textAreaTentativas);
 
