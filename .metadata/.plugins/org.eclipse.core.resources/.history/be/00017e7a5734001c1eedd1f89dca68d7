@@ -25,5 +25,7 @@ public class Main {
 
 		UIMain uim = new UIMain(instancia.palavraRepository);
 		uim.setVisible(true);
+
 	}
+
 }

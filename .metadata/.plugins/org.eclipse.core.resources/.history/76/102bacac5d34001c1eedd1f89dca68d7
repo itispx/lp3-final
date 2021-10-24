@@ -33,12 +33,10 @@ public class UIDificuldade extends JFrame {
 		btnJogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (dificuldade == null) {
-					lblAviso.setText("Escolha uma dificuldade");
-				} else {
-					UIJogo uij = new UIJogo(palavraRepository);
-					uij.setVisible(true);
-					setVisible(false);
+
 				}
+				// TO DO: Conferir se dificuldade foi selecionada
+				// TO DO: Ir para a tela do jogo
 			}
 		});
 		btnJogar.setBounds(225, 227, 199, 23);

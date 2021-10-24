@@ -87,7 +87,6 @@ public class UIAdicionar extends JFrame {
 				if (dif != null) {
 					Palavra novaPalavra = new Palavra(null, palavra, dif);
 					palavraRepository.save(novaPalavra);
-					lblAviso.setText("Palavra adicionada");
 				}
 
 			}
@@ -124,9 +123,7 @@ public class UIAdicionar extends JFrame {
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UIMain uim = new UIMain(palavraRepository);
-				uim.setVisible(true);
-				setVisible(false);
+				// TO DO: Navegação
 			}
 		});
 		btnVoltar.setBounds(10, 191, 414, 23);

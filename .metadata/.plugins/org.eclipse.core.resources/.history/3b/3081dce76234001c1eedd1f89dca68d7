@@ -13,6 +13,7 @@ import br.ifsul.jogodaforca.model.PalavraRepository;
 public class UIJogo extends JFrame {
 
 	private JPanel contentPane;
+	private TextArea textArea;
 
 	public UIJogo(PalavraRepository palavraRepository) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,6 +23,15 @@ public class UIJogo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		textArea = new TextArea();
+		textArea.setBounds(10, 10, 380, 160);
+		contentPane.add(textArea);
+
 		List<Palavra> listaPalavras = palavraRepository.findByDificuldade(false);
+
+		for (Palavra p : listaPalavras) {
+			textArea.append(p.getPalavra() + "\n");
+		}
+
 	}
 }

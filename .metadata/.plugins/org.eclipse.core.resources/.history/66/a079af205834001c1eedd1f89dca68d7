@@ -48,9 +48,8 @@ public class UIMain extends JFrame {
 		JButton btnJogar = new JButton("Jogar");
 		btnJogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UIDificuldade uid = new UIDificuldade(palavraRepository);
-				uid.setVisible(true);
-				setVisible(false);
+				// TO DO: Navegação
+
 			}
 		});
 		btnJogar.setBounds(10, 54, 414, 23);

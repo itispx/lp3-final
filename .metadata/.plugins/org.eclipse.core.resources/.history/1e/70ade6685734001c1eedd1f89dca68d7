@@ -34,9 +34,6 @@ public class UIRelatorio extends JFrame {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UIMain uim = new UIMain(palavraRepository);
-				uim.setVisible(true);
-				setVisible(false);
 			}
 		});
 		btnVoltar.setBounds(173, 227, 89, 23);
