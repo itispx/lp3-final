@@ -133,7 +133,7 @@ public class UIJogo extends JFrame {
 								e2.printStackTrace();
 							}
 							if (vidas == 0) {
-								endGame("perdeu", palavraRepository);
+								JOptionPane.showMessageDialog(null, "Você perdeu!");
 							}
 
 						} else {
@@ -149,7 +149,7 @@ public class UIJogo extends JFrame {
 							}
 
 							if (!exibir.contains('_')) {
-								endGame("ganhou", palavraRepository);
+								JOptionPane.showMessageDialog(null, "Você ganhou!");
 							}
 
 						}
@@ -204,9 +204,8 @@ public class UIJogo extends JFrame {
 
 		return resizedImg;
 	}
-
-	private void endGame(String status, PalavraRepository palavraRepository) {
-		JOptionPane.showMessageDialog(null, "Você " + status + "!");
+	
+	private void backToMenu(PalavraRepository palavraRepository) {
 		UIMain uim = new UIMain(palavraRepository);
 		uim.setVisible(true);
 		setVisible(false);

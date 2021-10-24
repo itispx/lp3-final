@@ -3,8 +3,6 @@ package br.ifsul.jogodaforca.ui;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +81,7 @@ public class UIJogo extends JFrame {
 				String entrada = textFielEntrada.getText().toUpperCase();
 				lblAviso.setText("");
 				textFielEntrada.setText("");
-
+				
 				if (entrada.isEmpty()) {
 					lblAviso.setText("Insira uma letra");
 				} else if (entrada.length() > 1) {
@@ -133,7 +131,9 @@ public class UIJogo extends JFrame {
 								e2.printStackTrace();
 							}
 							if (vidas == 0) {
-								endGame("perdeu", palavraRepository);
+								// VOCÊ PERDEU
+								System.out.println("Derrota");
+								JOptionPane.showMessageDialog(null, "Você perdeu");
 							}
 
 						} else {
@@ -149,7 +149,8 @@ public class UIJogo extends JFrame {
 							}
 
 							if (!exibir.contains('_')) {
-								endGame("ganhou", palavraRepository);
+								// VOCÊ GANHOU
+								System.out.println("Vitória");
 							}
 
 						}
@@ -203,12 +204,5 @@ public class UIJogo extends JFrame {
 		g2.dispose();
 
 		return resizedImg;
-	}
-
-	private void endGame(String status, PalavraRepository palavraRepository) {
-		JOptionPane.showMessageDialog(null, "Você " + status + "!");
-		UIMain uim = new UIMain(palavraRepository);
-		uim.setVisible(true);
-		setVisible(false);
 	}
 }

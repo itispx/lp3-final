@@ -1,11 +1,7 @@
 package br.ifsul.jogodaforca.ui;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +9,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import org.hibernate.internal.build.AllowSysOut;
 
 import br.ifsul.jogodaforca.model.Palavra;
 import br.ifsul.jogodaforca.model.PalavraRepository;
@@ -46,13 +43,8 @@ public class UIJogo extends JFrame {
 
 		JLabel lblBoneco = new JLabel("");
 		try {
-			ImageIcon imgIcon = new ImageIcon(this.getClass().getResource("/vidas_6.png"));
-			Image img = imgIcon.getImage();
-			Image resizedImg = getScaledImage(img, 113, 183);
-			imgIcon = new ImageIcon(resizedImg);
-
-			lblBoneco.setIcon(imgIcon);
-
+			
+			lblBoneco.setIcon(img);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -82,7 +74,6 @@ public class UIJogo extends JFrame {
 
 				String entrada = textFielEntrada.getText().toUpperCase();
 				lblAviso.setText("");
-				textFielEntrada.setText("");
 
 				if (entrada.isEmpty()) {
 					lblAviso.setText("Insira uma letra");
@@ -119,22 +110,7 @@ public class UIJogo extends JFrame {
 							System.out.println("Wrong");
 							erros.add(inputValue);
 							textAreaTentativas.append("| " + inputValue + " ");
-							vidas--;
-							try {
-								ImageIcon imgIcon = new ImageIcon(
-										this.getClass().getResource("/vidas_" + vidas + ".png"));
-								Image img = imgIcon.getImage();
-								Image resizedImg = getScaledImage(img, 113, 183);
-								imgIcon = new ImageIcon(resizedImg);
-
-								lblBoneco.setIcon(imgIcon);
-
-							} catch (Exception e2) {
-								e2.printStackTrace();
-							}
-							if (vidas == 0) {
-								endGame("perdeu", palavraRepository);
-							}
+							// VIDAS--
 
 						} else {
 							System.out.println("Right");
@@ -147,17 +123,11 @@ public class UIJogo extends JFrame {
 							for (int i = 0; i < strPalavra.length(); i++) {
 								textAreaPalavra.append(" " + exibir.get(i));
 							}
-
-							if (!exibir.contains('_')) {
-								endGame("ganhou", palavraRepository);
-							}
-
 						}
 					}
 				}
 			}
 		});
-
 		btnConfirmar.setBounds(10, 171, 103, 23);
 		contentPane.add(btnConfirmar);
 
@@ -192,23 +162,5 @@ public class UIJogo extends JFrame {
 		contentPane.add(textAreaPalavra);
 
 		System.out.println(palavra.getPalavra());
-	}
-
-	private Image getScaledImage(Image srcImg, int w, int h) {
-		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g2 = resizedImg.createGraphics();
-
-		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g2.drawImage(srcImg, 0, 0, w, h, null);
-		g2.dispose();
-
-		return resizedImg;
-	}
-
-	private void endGame(String status, PalavraRepository palavraRepository) {
-		JOptionPane.showMessageDialog(null, "Você " + status + "!");
-		UIMain uim = new UIMain(palavraRepository);
-		uim.setVisible(true);
-		setVisible(false);
 	}
 }
