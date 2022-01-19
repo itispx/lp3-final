@@ -1,5 +1,6 @@
 package br.ifsul.lp3.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ import br.ifsul.lp3.model.Car;
 import br.ifsul.lp3.model.repository.CarRepository;
 
 @Controller
-@RequestMapping("/car")
+@RequestMapping("/car/")
 public class CarController {
 
 	private ModelMapper mapper = new ModelMapper();
@@ -33,7 +34,7 @@ public class CarController {
 	CarRepository repo;
 
 	// Register
-	@PostMapping("/register")
+	@PostMapping("register")
 	public @ResponseBody String register(@RequestBody Car car) {
 
 		repo.save(car);
@@ -42,7 +43,7 @@ public class CarController {
 	}
 
 	// Update by id
-	@PutMapping("/update")
+	@PutMapping("update")
 	public ResponseEntity<Car> update(@RequestBody Car car) {
 		if (car.getId() == null) {
 			return new ResponseEntity<Car>(HttpStatus.METHOD_NOT_ALLOWED);
@@ -54,7 +55,7 @@ public class CarController {
 	}
 
 	// Delete by id
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("delete/{id}")
 	public ResponseEntity<Car> delete(@PathVariable Integer id) {
 		Optional<Car> car = repo.findById(id);
 
@@ -80,10 +81,9 @@ public class CarController {
 
 	}
 
-	@GetMapping("/listAll/{pageNumber}/{numberOfItems}")
-	public @ResponseBody List<CarDTO> listAll(@PathVariable Integer pageNumber, Integer numberOfItems) {
-		// Não funcionando porque eu não consigo receber os parametros
-		// Tirando isso tá ok
+	@GetMapping("listAll/{pageNumber}/{numberOfItems}")
+	public @ResponseBody List<CarDTO> listAll(@PathVariable Integer pageNumber, @PathVariable Integer numberOfItems) {
+
 		List<Car> cars = repo.findAll(PageRequest.of(pageNumber, numberOfItems)).getContent();
 
 		List<CarDTO> carsDTO = cars.stream().map(this::convert).collect(Collectors.toList());
@@ -93,5 +93,40 @@ public class CarController {
 
 	private CarDTO convert(Car car) {
 		return mapper.map(car, CarDTO.class);
+	}
+
+	// Full search
+	@GetMapping("search/{keyword}")
+	public @ResponseBody List<Car> search(@PathVariable String keyword) {
+		List<Car> cars = repo.findByModel(keyword);
+
+		return cars;
+	}
+
+	// Short search
+	@GetMapping("shortSearch/{keyword}")
+	public @ResponseBody List<CarDTO> shortSearch(@PathVariable String keyword) {
+		List<Car> cars = search(keyword);
+
+		List<CarDTO> carsDTO = new ArrayList<CarDTO>();
+
+		for (Car c : cars) {
+			CarDTO cdto = new CarDTO();
+			cdto.setModel(c.getModel());
+			cdto.setColor(c.getColor());
+			cdto.setReleaseDate(c.getReleaseDate());
+			carsDTO.add(cdto);
+		}
+
+		return carsDTO;
+	}
+
+	// Search cars by date
+
+	@GetMapping("searchColor/{color}")
+	public @ResponseBody List<Car> searchColor(@PathVariable String color) {
+		List<Car> cars = repo.findByColor(color);
+
+		return cars;
 	}
 }
