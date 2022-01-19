@@ -2,9 +2,7 @@ package br.ifsul.lp3.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -19,31 +17,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.ifsul.lp3.dto.ManufacturerDTO;
 import br.ifsul.lp3.model.Manufacturer;
 import br.ifsul.lp3.model.repository.ManufacturerRepository;
 
 @Controller
-@RequestMapping("/manufacturer")
+@RequestMapping("/manufacturer/")
 public class ManufacturerController {
-	private ModelMapper mapper = new ModelMapper();
 
 	@Autowired
 	ManufacturerRepository repo;
 
 	// Register
-	@PostMapping("/register")
-	public @ResponseBody String register(@RequestBody Manufacturer manufacturer) {
+	@PostMapping("register")
+	public @ResponseBody ResponseEntity<Manufacturer> register(@RequestBody Manufacturer manufacturer) {
 
-		repo.save(manufacturer);
+		Manufacturer saved = repo.save(manufacturer);
 
-		return "manufacturer registered";
+		return new ResponseEntity<Manufacturer>(saved, HttpStatus.OK);
 	}
 
 	// Update by id
-	@PutMapping("/update")
-	public ResponseEntity<Manufacturer> update(@RequestBody Manufacturer manufacturer) {
+	@PutMapping("update")
+	public @ResponseBody ResponseEntity<Manufacturer> update(@RequestBody Manufacturer manufacturer) {
+		System.out.println(manufacturer);
 		if (manufacturer.getId() == null) {
+			System.out.println("no id");
 			return new ResponseEntity<Manufacturer>(HttpStatus.METHOD_NOT_ALLOWED);
 		}
 
@@ -53,8 +51,8 @@ public class ManufacturerController {
 	}
 
 	// Delete by id
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Manufacturer> delete(@PathVariable Integer id) {
+	@DeleteMapping("delete/{id}")
+	public @ResponseBody ResponseEntity<Manufacturer> delete(@PathVariable Integer id) {
 		Optional<Manufacturer> manufacturer = repo.findById(id);
 
 		if (manufacturer.isPresent()) {
@@ -68,7 +66,7 @@ public class ManufacturerController {
 
 	// Get by id
 	@GetMapping("{id}")
-	public ResponseEntity<Manufacturer> getById(@PathVariable Integer id) {
+	public @ResponseBody ResponseEntity<Manufacturer> getById(@PathVariable Integer id) {
 		Optional<Manufacturer> manufacturer = repo.findById(id);
 
 		if (manufacturer.isPresent()) {
@@ -79,18 +77,12 @@ public class ManufacturerController {
 
 	}
 
-	@GetMapping("/listAll/{pageNumber}/{numberOfItems}")
-	public @ResponseBody List<ManufacturerDTO> listAll(@PathVariable Integer pageNumber, Integer numberOfItems) {
-		// Não funcionando porque eu não consigo receber os parametros
-		// Tirando isso tá ok
+	@GetMapping("listAll/{pageNumber}/{numberOfItems}")
+	public @ResponseBody List<Manufacturer> listAll(@PathVariable Integer pageNumber,
+			@PathVariable Integer numberOfItems) {
+
 		List<Manufacturer> manufacturers = repo.findAll(PageRequest.of(pageNumber, numberOfItems)).getContent();
 
-		List<ManufacturerDTO> manufacturersDTO = manufacturers .stream().map(this::convert).collect(Collectors.toList());
-
-		return manufacturersDTO;
-	}
-
-	private ManufacturerDTO convert(Manufacturer manufacturer) {
-		return mapper.map(manufacturer, ManufacturerDTO.class);
+		return manufacturers;
 	}
 }

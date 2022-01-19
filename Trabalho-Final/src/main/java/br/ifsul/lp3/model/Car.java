@@ -31,7 +31,7 @@ public class Car {
 	private String model;
 
 	private String color;
-	
+
 	private Date releaseDate;
 
 	@ManyToOne

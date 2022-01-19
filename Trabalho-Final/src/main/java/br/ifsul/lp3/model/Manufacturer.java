@@ -1,5 +1,6 @@
 package br.ifsul.lp3.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,12 +39,17 @@ public class Manufacturer {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "manufacturer")
 	private List<Car> cars;
 
-//	public void addCar(Car c) {
-//		if (this.cars == null)
-//			this.cars = new ArrayList<>();
-//
-//		c.setManufacturer(this);
-//
-//		this.cars.add(c);
-//	}
+	public void addCar(Car c) {
+		if (this.cars == null) {
+			this.cars = new ArrayList<>();
+		}
+
+		c.setManufacturer(this);
+
+		this.cars.add(c);
+	}
+
+	public void removeCar(Integer id) {
+		this.cars.removeIf(c -> c.getId() == id);
+	}
 }

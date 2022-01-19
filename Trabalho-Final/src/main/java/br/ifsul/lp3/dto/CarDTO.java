@@ -8,9 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CarDTO {
-	private Integer id;
 	private String model;
 	private String color;
 	private Date releaseDate;
-	private ManufacturerDTO manufacturer;
 }
